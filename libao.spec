@@ -9,7 +9,7 @@ Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
 Summary(pt_BR):	Biblioteca libao
 Name:		libao
 Version:	0.8.3
-Release:	3
+Release:	3.1
 Epoch:		1
 License:	GPL
 Vendor:		Xiphophorus <team@xiph.org>
@@ -25,6 +25,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	esound-devel >= 0.2.8
 BuildRequires:	libtool
+BuildRequires:	alsa-lib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
