@@ -139,7 +139,7 @@ rm -f missing acinclude.m4
 libtoolize --copy --force
 aclocal
 autoconf
-automake -a -c
+automake -a -c -f
 %configure \
 %ifnarch sparc sparc64
 	%{?_without_alsa:--disable-alsa} \
