@@ -9,6 +9,8 @@ URL:		http://www.xiph.org/
 Vendor:		Xiphophorus <team@xiph.org>
 Source:		ftp://www.xiph.org/ogg/vorbis/download/vorbis_nightly_cvs.tgz
 Patch0:		%{name}-make.patch
+BuildRequires:	esound-devel
+BuildRequires:	alsa-lib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -41,40 +43,34 @@ The libao-static package contains the static libraries of libao.
 %patch0 -p1
 
 %build
-if [ ! -f configure ]; then
-  CFLAGS="$RPM_OPT_FLAGS" ./autogen.sh --prefix=%{_prefix}
-else
-  CFLAGS="$RPM_OPT_FLAGS" %configure --prefix=%{_prefix}
-fi
+./autogen.sh
+%configure
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
+
+gzip -9nf AUTHORS CHANGES README
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS
-%doc CHANGES
-%doc COPYING
-%doc README
-%attr(755,root,root) %{_libdir}/libao.so*
-%attr(755,root,root) %{_libdir}/libao.la
+%doc *.gz
+%attr(755,root,root) %{_libdir}/libao.so.*
 
 %files devel
 %defattr(644,root,root,755)
 %doc doc/index.html
-%{_includedir}/ao/ao.h
-%{_includedir}/ao/os_types.h
+%attr(755,root,root) %{_libdir}/libao.so
+%attr(755,root,root) %{_libdir}/libao.la
+%{_includedir}/ao
 
 %files static
 %attr(644,root,root) %{_libdir}/*.a
-
-%clean 
-rm -rf $RPM_BUILD_ROOT
-
-%post
-/sbin/ldconfig
-
-%postun
-/sbin/ldconfig
