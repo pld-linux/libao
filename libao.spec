@@ -17,14 +17,14 @@ Group:		Libraries
 Source0:	http://www.xiph.org/ogg/vorbis/download/%{name}-%{version}.tar.gz
 Patch0:		%{name}-ac_am_fixes.patch
 URL:		http://www.xiph.org/
-BuildRequires:	libtool
-BuildRequires:	automake
-BuildRequires:	autoconf
-BuildRequires:	esound-devel >= 0.2.8
-%{!?_without_arts:BuildRequires:	arts-devel}
 %ifnarch sparc sparc64
 %{!?_without_alsa:BuildRequires:	alsa-lib-devel}
 %endif
+%{!?_without_arts:BuildRequires:	arts-devel}
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	esound-devel >= 0.2.8
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -156,8 +156,6 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	m4datadir=%{_aclocaldir}
 
-gzip -9nf AUTHORS CHANGES README TODO
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -166,7 +164,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc AUTHORS CHANGES README TODO
 %attr(755,root,root) %{_libdir}/libao.so.*.*
 %dir %{_libdir}/ao
 %dir %{_libdir}/ao/plugins-2

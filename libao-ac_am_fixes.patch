@@ -77,6 +77,52 @@
  dnl ==============================
  dnl Checks for types
  dnl ==============================
+@@ -85,8 +85,8 @@
+ 
+ if test "$BUILD_ESD" = "yes"; then
+   AM_PATH_ESD(0.2.8, have_esd=yes, have_esd=no)
+-  AM_CONDITIONAL(HAVE_ESD,test "x$have_esd" = xyes)
+ fi
++AM_CONDITIONAL(HAVE_ESD,test "x$have_esd" = xyes)
+ 
+ 
+ dnl Check for OSS
+@@ -104,8 +104,8 @@
+ if test "$BUILD_ALSA" = "yes"; then
+    AC_CHECK_LIB(asound, snd_pcm_channel_params, have_alsa=yes, have_alsa=no)
+    AC_CHECK_HEADER(sys/asoundlib.h, , have_alsa=no)
+-   AM_CONDITIONAL(HAVE_ALSA,test "x$have_alsa" = xyes)
+ fi
++AM_CONDITIONAL(HAVE_ALSA,test "x$have_alsa" = xyes)
+ 
+ if test "x$have_alsa" = xyes; then
+ 	ALSA_LIBS="-lasound"
+@@ -123,8 +123,8 @@
+ if test "$BUILD_ALSA09" = "yes"; then
+    AC_CHECK_LIB(asound, snd_pcm_open, have_alsa09=yes, have_alsa09=no)
+    AC_CHECK_HEADER(alsa/asoundlib.h, , have_alsa09=no)
+-   AM_CONDITIONAL(HAVE_ALSA09,test "x$have_alsa09" = xyes)
+ fi
++AM_CONDITIONAL(HAVE_ALSA09,test "x$have_alsa09" = xyes)
+ 
+ if test "x$have_alsa09" = xyes; then
+ 	ALSA09_LIBS="-lasound"
+@@ -159,7 +159,6 @@
+ 
+ if test "$BUILD_ARTS" = "yes"; then
+   AC_PATH_PROG(ARTSC_CONFIG, artsc-config)
+-  AM_CONDITIONAL(HAVE_ARTS,test "x$ac_cv_path_ARTSC_CONFIG" != x)
+ 
+   if test "x$ac_cv_path_ARTSC_CONFIG" != x
+   then
+@@ -167,6 +166,7 @@
+ 	ARTS_LIBS=`$ac_cv_path_ARTSC_CONFIG --libs`
+   fi
+ fi
++AM_CONDITIONAL(HAVE_ARTS,test "x$ac_cv_path_ARTSC_CONFIG" != x)
+ 
+ AC_SUBST(ARTS_CFLAGS)
+ AC_SUBST(ARTS_LIBS)
 --- libao-0.8.2/Makefile.am~	Sun Jan  6 04:31:38 2002
 +++ libao-0.8.2/Makefile.am	Sun Jan  6 04:31:38 2002
 @@ -6,7 +6,6 @@
