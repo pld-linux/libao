@@ -1,33 +1,34 @@
 #
 # Conditional build:
-%bcond_without	alsa	# don't build ALSA plugin
-%bcond_without	arts	# don't build aRts plugin
-%bcond_without	nas 	# don't build NAS plugin
+%bcond_without	alsa		# don't build ALSA plugin
+%bcond_without	arts		# don't build aRts plugin
+%bcond_without	nas 		# don't build NAS plugin
+%bcond_without	polypaudio	# don't build Polypaudio plugin
 #
 Summary:	Cross Platform Audio Output Library
 Summary(es):	Biblioteca libao
 Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
 Summary(pt_BR):	Biblioteca libao
 Name:		libao
-Version:	0.8.5
+Version:	0.8.6
 Release:	1
 Epoch:		1
-License:	GPL
+License:	GPL v2+
 Vendor:		Xiphophorus <team@xiph.org>
 Group:		Libraries
-Source0:	http://www.xiph.org/ao/src/%{name}-%{version}.tar.gz
-# Source0-md5:	dd72b66f5f29361411bda465470b65e2
-Patch0:		%{name}-am18.patch
-URL:		http://www.xiph.org/
+Source0:	http://downloads.xiph.org/releases/ao/%{name}-%{version}.tar.gz
+# Source0-md5:	12e136a4c0995068ff134997c84421ed
+URL:		http://www.xiph.org/ao/
 %{?with_alsa:BuildRequires:	alsa-lib-devel >= 1.0.0}
 %{?with_arts:BuildRequires:	artsc-devel}
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	esound-devel >= 0.2.8
-%{?with_nas:BuildRequires:	nas-devel}
 BuildRequires:	libtool
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+%{?with_nas:BuildRequires:	nas-devel}
+%{?with_polypaudio:BuildRequires:	polypaudio-devel >= 0.6}
 Obsoletes:	libao2
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Libao is a cross-platform audio library that allows programs to output
@@ -98,6 +99,18 @@ Statyczna wersja biblioteki libao.
 %description static -l pt_BR
 Biblioteca de audio Libao.
 
+%package alsa
+Summary:	Advanced Linux Sound Architecture (ALSA) plugin for libao
+Summary(pl):	Wtyczka libao dla Advanced Linux Sound Architecture (ALSA)
+Group:		Libraries
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description alsa
+Advanced Linux Sound Architecture (ALSA) plugin for libao.
+
+%description alsa -l pl
+Wtyczka libao dla Advanced Linux Sound Architecture (ALSA).
+
 %package arts
 Summary:	Arts plugin for libao
 Summary(pl):	Wtyczka arts dla libao
@@ -117,22 +130,10 @@ Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description esd
-Arts plugin for ESD.
+ESD plugin for libao.
 
 %description esd -l pl
 Wtyczka esd dla libao.
-
-%package alsa
-Summary:	Advanced Linux Sound Architecture (ALSA) plugin for libao
-Summary(pl):	Wtyczka libao dla Advanced Linux Sound Architecture (ALSA)
-Group:		Libraries
-Requires:	%{name} = %{epoch}:%{version}-%{release}
-
-%description alsa
-Advanced Linux Sound Architecture (ALSA) plugin for libao.
-
-%description alsa -l pl
-Wtyczka libao dla Advanced Linux Sound Architecture (ALSA).
 
 %package nas
 Summary:	Network Audio System (NAS) plugin for libao
@@ -146,11 +147,23 @@ Network Audio System (NAS) plugin for libao.
 %description nas -l pl
 Wtyczka libao dla Network Audio System (NAS).
 
+%package polyp
+Summary:	Polypaudio plugin for libao
+Summary(pl):	Wtyczka Polypaudio dla libao
+Group:		Libraries
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description polyp
+Polypaudio plugin for libao.
+
+%description polyp -l pl
+Wtyczka Polypaudio dla libao.
+
 %prep
 %setup -q
-%patch0 -p1
 
 %build
+# just AM_PATH_ESD copy
 rm -f acinclude.m4
 %{__libtoolize}
 %{__aclocal}
@@ -168,7 +181,9 @@ rm -f acinclude.m4
 %if %{without nas}
 	--disable-nas \
 %endif
-	--enable-shared \
+%if %{without polypaudio}
+	--disable-polyp \
+%endif
 	--enable-static
 
 %{__make}
@@ -177,8 +192,7 @@ rm -f acinclude.m4
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	m4datadir=%{_aclocaldir}
+	DESTDIR=$RPM_BUILD_ROOT
 
 # dlopened by *.so
 rm -f $RPM_BUILD_ROOT%{_libdir}/ao/plugins-2/*.{la,a}
@@ -192,7 +206,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS CHANGES README TODO
-%attr(755,root,root) %{_libdir}/libao.so.*.*
+%attr(755,root,root) %{_libdir}/libao.so.*.*.*
 %dir %{_libdir}/ao
 %dir %{_libdir}/ao/plugins-2
 %attr(755,root,root) %{_libdir}/ao/plugins-2/liboss.so
@@ -204,12 +218,18 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libao.so
 %{_libdir}/libao.la
 %{_includedir}/ao
-%{_aclocaldir}/*
+%{_aclocaldir}/ao.m4
 %{_pkgconfigdir}/*.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+
+%if %{with alsa}
+%files alsa
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa*.so
+%endif
 
 %if %{with arts} 
 %files arts
@@ -221,14 +241,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libesd.so
 
-%if %{with alsa}
-%files alsa
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa*.so
-%endif
-
 %if %{with nas}
 %files nas
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libnas.so
+%endif 
+
+%if %{with polypaudio}
+%files polyp
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/ao/plugins-2/libpolyp.so
 %endif 
