@@ -123,28 +123,28 @@ Arts plugin for ESD.
 Wtyczka esd dla libao.
 
 %package alsa
-Summary:	ALSA plugin for libao
-Summary(pl):	Wtyczka ALSA dla libao
+Summary:	Advanced Linux Sound Architecture (ALSA) plugin for libao
+Summary(pl):	Wtyczka libao dla Advanced Linux Sound Architecture (ALSA)
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}
 
 %description alsa
-ALSA plugin for libao.
+Advanced Linux Sound Architecture (ALSA) plugin for libao.
 
 %description alsa -l pl
-Wtyczka ALSA dla libao.
+Wtyczka libao dla Advanced Linux Sound Architecture (ALSA).
 
 %package nas
-Summary:	NAS plugin for libao
-Summary(pl):	Wtyczka NAS dla libao
+Summary:	Network Audio System (NAS) plugin for libao
+Summary(pl):	Wtyczka libao dla Network Audio System (NAS)
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}
 
 %description nas
-NAS plugin for libao.
+Network Audio System (NAS) plugin for libao.
 
 %description nas -l pl
-Wtyczka NAS dla libao.
+Wtyczka libao dla Network Audio System (NAS).
 
 %prep
 %setup -q
