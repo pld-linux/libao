@@ -1,6 +1,6 @@
 #
 # Conditional build:	
-# bcond_off_alsa - without ALSA support
+# _without_alsa - without ALSA support
 #
 Summary:	Cross Platform Audio Output Library
 Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
@@ -19,7 +19,7 @@ Patch0:		%{name}-make.patch
 Patch1:		%{name}-opt.patch
 URL:		http://www.xiph.org/
 BuildRequires:	esound-devel
-%{!?bcond_off_alsa:BuildRequires:	alsa-lib-devel}
+%{!?_without_alsa:BuildRequires:	alsa-lib-devel}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -70,7 +70,7 @@ Statyczna wersja biblioteki libao.
 %build
 ./autogen.sh
 CFLAGS="%{rpmcflags} -ffast-math -D_REENTRANT -fsigned-char"
-%configure %{?bcond_off_alsa:--without-alsa}
+%configure %{?_without_alsa:--without-alsa}
 
 %{__make}
 
