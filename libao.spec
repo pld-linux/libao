@@ -9,7 +9,7 @@ Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
 Summary(pt_BR):	Biblioteca libao
 Name:		libao
 Version:	0.8.3
-Release:	3.2
+Release:	4
 Epoch:		1
 License:	GPL
 Vendor:		Xiphophorus <team@xiph.org>
@@ -26,6 +26,7 @@ BuildRequires:	automake
 BuildRequires:	esound-devel >= 0.2.8
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	libao2
 
 %description
 Libao is a cross-platform audio library that allows programs to output
@@ -60,6 +61,7 @@ Summary:	Cross Platform Audio Output Library Development
 Summary(pl):	Czê¶æ dla programistów biblioteki libao
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
+Obsoletes:	libao2-devel
 
 %description devel
 The libao-devel package contains the header files and documentation
@@ -150,13 +152,15 @@ rm -f missing acinclude.m4
 	--enable-shared \
 	--enable-static
 
-%{__make}
+%{__make} \
+	plugindir=%{_libdir}/ao
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
+	plugindir=%{_libdir}/ao \
 	m4datadir=%{_aclocaldir}
 
 %clean
@@ -170,9 +174,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS CHANGES README TODO
 %attr(755,root,root) %{_libdir}/libao.so.*.*
 %dir %{_libdir}/ao
-%dir %{_libdir}/ao/plugins-2
-%attr(755,root,root) %{_libdir}/ao/plugins-2/liboss.so
-%{_libdir}/ao/plugins-2/liboss.la
+%attr(755,root,root) %{_libdir}/ao/liboss.so
+%{_libdir}/ao/liboss.la
 %{_mandir}/man5/*
 
 %files devel
@@ -190,20 +193,20 @@ rm -rf $RPM_BUILD_ROOT
 %if %{?_without_arts:0}%{!?_without_arts:1}
 %files arts
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-2/libarts.so
-%{_libdir}/ao/plugins-2/libarts.la
+%attr(755,root,root) %{_libdir}/ao/libarts.so
+%{_libdir}/ao/libarts.la
 %endif
 
 %files esd
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-2/libesd.so
-%{_libdir}/ao/plugins-2/libesd.la
+%attr(755,root,root) %{_libdir}/ao/libesd.so
+%{_libdir}/ao/libesd.la
 
 %if %{?_without_alsa:0}%{!?_without_alsa:1}
 %ifnarch sparc sparc64
 %files alsa
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa*.so
-%{_libdir}/ao/plugins-2/libalsa*.la
+%attr(755,root,root) %{_libdir}/ao/libalsa*.so
+%{_libdir}/ao/libalsa*.la
 %endif
 %endif
