@@ -8,15 +8,14 @@ Summary(es):	Biblioteca libao
 Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
 Summary(pt_BR):	Biblioteca libao
 Name:		libao
-Version:	0.8.3
-Release:	5
+Version:	0.8.4
+Release:	1
 Epoch:		1
 License:	GPL
 Vendor:		Xiphophorus <team@xiph.org>
 Group:		Libraries
-Source0:	http://www.xiph.org/ogg/vorbis/download/%{name}-%{version}.tar.gz
-# Source0-md5:	b1422a6ff7f58131921b9f2fabe2295c
-Patch0:		%{name}-ac_am_fixes.patch
+Source0:	http://www.xiph.org/ao/src/%{name}-%{version}.tar.gz
+# Source0-md5:	0525549b0bf665f617913c916064cc87
 URL:		http://www.xiph.org/
 %ifnarch sparc sparc64
 %{!?_without_alsa:BuildRequires:	alsa-lib-devel}
@@ -25,6 +24,7 @@ URL:		http://www.xiph.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	esound-devel >= 0.2.8
+BuildRequires:	nas-devel
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libao2
@@ -134,9 +134,20 @@ ALSA plugin for libao.
 %description alsa -l pl
 Wtyczka ALSA dla libao.
 
+%package nas
+Summary:	NAS plugin for libao
+Summary(pl):	Wtyczka NAS dla libao
+Group:		Libraries
+Requires:	%{name} = %{epoch}:%{version}
+
+%description nas
+NAS plugin for libao.
+
+%description nas -l pl
+Wtyczka NAS dla libao.
+
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 rm -f missing acinclude.m4
@@ -187,6 +198,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libao.la
 %{_includedir}/ao
 %{_aclocaldir}/*
+%{_pkgconfigdir}/*.pc
 
 %files static
 %defattr(644,root,root,755)
@@ -209,3 +221,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa*.so
 %endif
 %endif
+
+%files nas
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/ao/plugins-2/libnas.so
