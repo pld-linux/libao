@@ -204,7 +204,7 @@ rm -rf $RPM_BUILD_ROOT
 %ifnarch sparc sparc64
 %files alsa
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa.so
-%attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa.la
+%attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa*.so
+%attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa*.la
 %endif
 %endif
