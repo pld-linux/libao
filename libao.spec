@@ -3,7 +3,7 @@
 
 %bcond_without alsa	# without ALSA support
 %bcond_without arts	# without aRts support
-%bcond_with nas 	# without nas support
+%bcond_with nas 	# with nas support
 
 Summary:	Cross Platform Audio Output Library
 Summary(es):	Biblioteca libao
