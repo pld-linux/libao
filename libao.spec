@@ -24,7 +24,7 @@ URL:		http://www.xiph.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	esound-devel >= 0.2.8
-#BuildRequires:	nas-devel
+BuildRequires:	nas-devel
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libao2
