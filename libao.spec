@@ -1,6 +1,7 @@
 #
 # Conditional build:	
 # _without_alsa - without ALSA support
+# _without_arts - without aRts support
 #
 Summary:	Cross Platform Audio Output Library
 Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
@@ -21,7 +22,7 @@ BuildRequires:	libtool
 BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	esound-devel >= 0.2.8
-BuildRequires:	arts-devel
+%{!?_without_arts:BuildRequires:	arts-devel}
 %ifnarch sparc sparc64
 %{!?_without_alsa:BuildRequires:	alsa-lib-devel}
 %endif
@@ -112,6 +113,7 @@ automake -a -c
 %ifnarch sparc sparc64
 	%{?_without_alsa:--disable-alsa} \
 	%{?!_without_alsa:--enable-alsa} \
+	%{?_without_arts:--disable-arts} \
 %endif
 	--enable-shared \
 	--enable-static
@@ -151,10 +153,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/*.a
 
+%if %{?_without_arts:0}%{!?_without_arts:1}
 %files arts
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ao/libarts.so
 %attr(755,root,root) %{_libdir}/ao/libarts.la
+%endif
 
 %files esd
 %defattr(644,root,root,755)
