@@ -9,7 +9,7 @@ Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
 Summary(pt_BR):	Biblioteca libao
 Name:		libao
 Version:	0.8.3
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Vendor:		Xiphophorus <team@xiph.org>
@@ -42,8 +42,11 @@ System), ESD (ESounD or Enlighten Sound Daemon), ALSA (Advanced Linux
 Sound Architecture), Solaris (untested), IRIX (untested).
 
 %description -l pl
-libao jest miêdzyplatformow± bibliotek± do odtwarzania d¼wiêku.
-Aktualnie wspiera ESD, OSS, Solaris i IRIX.
+Libao jest bibliotek± do odtwarzania d¼wiêku, która ma proste API i jest
+dostêpna na wielu ró¿nych platformach.  Aktualnie wspiera odtwarzanie na
+urz±dzenie puste (null output), do plików w formacie WAV, do demona ESD
+(ESounD tudzie¿ Enlighten Sound Daemon) oraz urz±dzenia ALSA (Advanced
+Linux Sound Architecture), OSS (Open Sound System), Solaris i IRIX.
 
 %description -l pt_BR
 Libao é uma biblioteca de audio multi-plataforma que permite programas
@@ -111,7 +114,7 @@ Group:		Libraries
 Requires:	%{name} = %{version}
 
 %description esd
-Arts plugin for esd.
+Arts plugin for ESD.
 
 %description esd -l pl
 Wtyczka esd dla libao.
