@@ -22,7 +22,8 @@ Group(pt_BR):	Bibliotecas
 Group(ru):	Библиотеки
 Group(uk):	Б╕бл╕отеки
 Source0:	http://www.xiph.org/ogg/vorbis/download/%{name}-%{version}.tar.gz
-PAtch0:		%{name}-ac_am_fixes.patch
+Patch0:		%{name}-ac_am_fixes.patch
+Patch1:		%{name}-libdep.patch
 URL:		http://www.xiph.org/
 BuildRequires:	libtool
 BuildRequires:	automake
@@ -175,6 +176,7 @@ Wtyczka ALSA dla libao.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 rm -f missing acinclude.m4
