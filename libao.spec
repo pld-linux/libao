@@ -3,13 +3,19 @@
 # _without_alsa - without ALSA support
 # _without_arts - without aRts support
 #
+%ifarch sparc sparc64
+%define	_without_alsa	1
+%endif
+%ifarch alpha
+%define	_without_arts	1
+%endif
 Summary:	Cross Platform Audio Output Library
 Summary(es):	Biblioteca libao
 Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
 Summary(pt_BR):	Biblioteca libao
 Name:		libao
 Version:	0.8.3
-Release:	5
+Release:	6
 Epoch:		1
 License:	GPL
 Vendor:		Xiphophorus <team@xiph.org>
@@ -18,9 +24,7 @@ Source0:	http://www.xiph.org/ogg/vorbis/download/%{name}-%{version}.tar.gz
 # Source0-md5: b1422a6ff7f58131921b9f2fabe2295c
 Patch0:		%{name}-ac_am_fixes.patch
 URL:		http://www.xiph.org/
-%ifnarch sparc sparc64
 %{!?_without_alsa:BuildRequires:	alsa-lib-devel}
-%endif
 %{!?_without_arts:BuildRequires:	arts-devel}
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -145,11 +149,9 @@ rm -f missing acinclude.m4
 %{__autoconf}
 %{__automake}
 %configure \
-%ifnarch sparc sparc64
 	%{?_without_alsa:--disable-alsa} \
-	%{?!_without_alsa:--enable-alsa} \
+	%{!?_without_alsa:--enable-alsa} \
 	%{?_without_arts:--disable-arts} \
-%endif
 	--enable-shared \
 	--enable-static
 
@@ -203,9 +205,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libesd.so
 
 %if %{?_without_alsa:0}%{!?_without_alsa:1}
-%ifnarch sparc sparc64
 %files alsa
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa*.so
-%endif
 %endif
