@@ -151,11 +151,13 @@ Wtyczka libao dla Network Audio System (NAS).
 %patch0 -p1
 
 %build
-rm -f missing acinclude.m4
+rm -f acinclude.m4
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
+# for ALSA 1.0
+CPPFLAGS="-DALSA_PCM_OLD_HW_PARAMS_API"
 %configure \
 %if %{without alsa}
 	--disable-alsa \
