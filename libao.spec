@@ -6,8 +6,8 @@
 Summary:	Cross Platform Audio Output Library
 Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
 Name:		libao
-Version:	0.7.0
-Release:	2
+Version:	0.8.0
+Release:	1
 Epoch:		1
 License:	GPL
 Vendor:		Xiphophorus <team@xiph.org>
@@ -16,7 +16,8 @@ Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
-Source0:	http://www.vorbis.com/files/rc1/unix/%{name}-%{version}.tar.gz
+Source0:	http://www.vorbis.com/files/rc2/unix/%{name}-%{version}.tar.gz
+PAtch0:		%{name}-ac_am_fixes.patch
 URL:		http://www.xiph.org/
 BuildRequires:	libtool
 BuildRequires:	automake
@@ -102,9 +103,10 @@ Wtyczka esd dla libao.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-rm missing
+rm -f missing acinclude.m4
 libtoolize --copy --force
 aclocal
 autoconf
@@ -123,9 +125,11 @@ automake -a -c
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	m4datadir=%{_aclocaldir}
 
-gzip -9nf AUTHORS CHANGES README TODO doc/API doc/DRIVERS
+gzip -9nf AUTHORS CHANGES README TODO
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -140,10 +144,11 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/ao
 %attr(755,root,root) %{_libdir}/ao/liboss.so
 %attr(755,root,root) %{_libdir}/ao/liboss.la
+%{_mandir}/man5/*
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/API*
+%doc doc/*{html,css}
 %attr(755,root,root) %{_libdir}/libao.so
 %attr(755,root,root) %{_libdir}/libao.la
 %{_includedir}/ao
@@ -151,7 +156,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/*.a
+%{_libdir}/lib*.a
 
 %if %{?_without_arts:0}%{!?_without_arts:1}
 %files arts
