@@ -1,10 +1,9 @@
 #
 # Conditional build:
-
-%bcond_without alsa	# without ALSA support
-%bcond_without arts	# without aRts support
-%bcond_with nas 	# with nas support
-
+%bcond_without	alsa	# don't build ALSA plugin
+%bcond_without	arts	# don't build aRts plugin
+%bcond_without	nas 	# don't build NAS plugin
+#
 Summary:	Cross Platform Audio Output Library
 Summary(es):	Biblioteca libao
 Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
@@ -19,20 +18,12 @@ Group:		Libraries
 Source0:	http://www.xiph.org/ao/src/%{name}-%{version}.tar.gz
 # Source0-md5:	0525549b0bf665f617913c916064cc87
 URL:		http://www.xiph.org/
-%ifnarch sparc sparc64
-%if %{with alsa}
-BuildRequires:	alsa-lib-devel
-%endif
-%endif
-%if %{with arts}
-BuildRequires:	arts-devel
-%endif
+%{?with_alsa:BuildRequires:	alsa-lib-devel}
+%{?with_arts:BuildRequires:	arts-devel}
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	esound-devel >= 0.2.8
-%if %{with nas}
-BuildRequires:	nas-devel
-%endif
+%{?with_nas:BuildRequires:	nas-devel}
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libao2
@@ -164,7 +155,6 @@ rm -f missing acinclude.m4
 %{__autoconf}
 %{__automake}
 %configure \
-%ifnarch sparc sparc64
 %if %{without alsa}
 	--disable-alsa \
 %else
@@ -173,11 +163,8 @@ rm -f missing acinclude.m4
 %if %{without arts}
 	--disable-arts \
 %endif	
-%endif
 %if %{without nas}
 	--disable-nas \
-%else
-	--enable-nas \
 %endif
 	--enable-shared \
 	--enable-static
@@ -233,11 +220,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libesd.so
 
 %if %{with alsa}
-%ifnarch sparc sparc64
 %files alsa
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa*.so
-%endif
 %endif
 
 %if %{with nas}
