@@ -5,7 +5,7 @@
 Summary:	Cross Platform Audio Output Library
 Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
 Name:		libao
-Version:	1.0.0_cvs2000.10.29
+Version:	0.7.0
 Release:	1
 License:	GPL
 Vendor:		Xiphophorus <team@xiph.org>
@@ -14,11 +14,13 @@ Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
-Source0:	ftp://www.xiph.org/ogg/vorbis/download/vorbis_nightly_cvs.tgz
-Patch0:		%{name}-make.patch
-Patch1:		%{name}-opt.patch
+Source0:	http://www.vorbis.com/files/rc1/unix/%{name}-%{version}.tar.gz
 URL:		http://www.xiph.org/
-BuildRequires:	esound-devel
+BuildRequires:	libtool
+BuildRequires:	automake
+BuildRequires:	autoconf
+BuildRequires:	esound-devel >= 0.2.8
+BuildRequires:	arts-devel
 %{!?_without_alsa:BuildRequires:	alsa-lib-devel}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -62,15 +64,52 @@ The libao-static package contains the static libraries of libao.
 %description static -l pl
 Statyczna wersja biblioteki libao.
 
+%package arts
+Summary:	Arts plugin for libao
+Summary(pl):	Wtyczka arts dla libao
+Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
+Group(fr):	Librairies
+Group(pl):	Biblioteki
+Requires:	libao = %{version}
+
+%description arts
+Arts plugin for libao.
+
+%description -l pl arts
+Wtyczka arts dla libao.
+
+%package esd
+Summary:	ESD plugin for libao
+Summary(pl):	Wtyczka ESD dla libao
+Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
+Group(fr):	Librairies
+Group(pl):	Biblioteki
+Requires:	libao = %{version}
+
+%description esd
+Arts plugin for esd.
+
+%description -l pl esd
+Wtyczka esd dla libao.
+
 %prep
-%setup -q -n ao
-%patch0 -p1
-%patch1 -p1
+%setup -q
 
 %build
-./autogen.sh
-CFLAGS="%{rpmcflags} -ffast-math -D_REENTRANT -fsigned-char"
-%configure %{?_without_alsa:--without-alsa}
+rm missing
+libtoolize --copy --force
+aclocal
+autoconf
+automake -a -c
+%configure \
+	%{?_without_alsa:--disable-alsa} \
+	%{?!_without_alsa:--enable-alsa} \
+	--enable-shared \
+	--enable-static
 
 %{__make}
 
@@ -79,7 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-gzip -9nf AUTHORS CHANGES README
+gzip -9nf AUTHORS CHANGES README TODO doc/API doc/DRIVERS
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -89,15 +128,30 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc *.gz doc/DRIVERS*
 %attr(755,root,root) %{_libdir}/libao.so.*.*
+%dir %{_libdir}/ao
+%attr(755,root,root) %{_libdir}/ao/liboss.so
+%attr(755,root,root) %{_libdir}/ao/liboss.la
 
 %files devel
 %defattr(644,root,root,755)
-%doc *.gz doc/index.html
+%doc doc/API*
 %attr(755,root,root) %{_libdir}/libao.so
 %attr(755,root,root) %{_libdir}/libao.la
 %{_includedir}/ao
+%{_aclocaldir}/*
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/*.a
+
+%files arts
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/ao/libarts.so
+%attr(755,root,root) %{_libdir}/ao/libarts.la
+
+%files esd
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/ao/libesd.so
+%attr(755,root,root) %{_libdir}/ao/libesd.la
