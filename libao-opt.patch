@@ -1,0 +1,20 @@
+diff -Nur ao.orig/configure.in ao/configure.in
+--- ao.orig/configure.in	Fri Mar 30 03:47:10 2001
++++ ao/configure.in	Fri Mar 30 03:50:10 2001
+@@ -51,7 +51,6 @@
+         case $host in
+         *-*-linux*)
+                 DEBUG="-g -Wall -D_REENTRANT -D__NO_MATH_INLINES -fsigned-char"
+-                CFLAGS="-O20 -ffast-math -D_REENTRANT -fsigned-char"
+                 PROFILE="-pg -g -O20 -ffast-math -D_REENTRANT -fsigned-char";;
+         sparc-sun-*)
+                 DEBUG="-g -Wall -D__NO_MATH_INLINES -fsigned-char -mv8"
+@@ -241,7 +240,7 @@
+ 
+ AC_MSG_RESULT("setting default output device... $ao_default")
+ 
+-CFLAGS="$LIBAO_FLAGS -DAO_DEFAULT=$AO_DEFAULT_DEF"
++CFLAGS="$CFLAGS $LIBAO_FLAGS -DAO_DEFAULT=$AO_DEFAULT_DEF"
+ 
+ AC_SUBST(LIBAO_FILES)
+ AC_SUBST(LIBAO_LIBS)
