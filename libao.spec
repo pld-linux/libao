@@ -7,7 +7,7 @@ Summary:	Cross Platform Audio Output Library
 Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
 Name:		libao
 Version:	0.8.0
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Vendor:		Xiphophorus <team@xiph.org>
@@ -139,7 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz doc/DRIVERS*
+%doc *.gz
 %attr(755,root,root) %{_libdir}/libao.so.*.*
 %dir %{_libdir}/ao
 %attr(755,root,root) %{_libdir}/ao/liboss.so
