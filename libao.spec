@@ -14,13 +14,6 @@ Epoch:		1
 License:	GPL
 Vendor:		Xiphophorus <team@xiph.org>
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Source0:	http://www.xiph.org/ogg/vorbis/download/%{name}-%{version}.tar.gz
 Patch0:		%{name}-ac_am_fixes.patch
 Patch1:		%{name}-libdep.patch
@@ -64,13 +57,6 @@ Linux Sound Architecture), Solaris (untested), IRIX (untested).
 Summary:	Cross Platform Audio Output Library Development
 Summary(pl):	CzЙ╤Ф dla programistСw biblioteki libao
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -93,13 +79,6 @@ Summary(es):	Bibliotecas estАticas
 Summary(pl):	Statyczna biblioteka libao
 Summary(pt_BR):	Bibliotecas estАticas
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -118,13 +97,6 @@ Biblioteca de audio Libao.
 Summary:	Arts plugin for libao
 Summary(pl):	Wtyczka arts dla libao
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description arts
@@ -137,13 +109,6 @@ Wtyczka arts dla libao.
 Summary:	ESD plugin for libao
 Summary(pl):	Wtyczka ESD dla libao
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description esd
@@ -156,13 +121,6 @@ Wtyczka esd dla libao.
 Summary:	ALSA plugin for libao
 Summary(pl):	Wtyczka ALSA dla libao
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Requires:	libao = %{version}
 
 %description alsa
