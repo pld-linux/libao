@@ -8,7 +8,7 @@ Summary(es):	Biblioteca libao
 Summary(pl):	MiÍdzyplatformowa biblioteka do odtwarzania dºwiÍku
 Summary(pt_BR):	Biblioteca libao
 Name:		libao
-Version:	0.8.0
+Version:	0.8.2
 Release:	2
 Epoch:		1
 License:	GPL
@@ -21,7 +21,7 @@ Group(pl):	Biblioteki
 Group(pt_BR):	Bibliotecas
 Group(ru):	‚…¬Ã…œ‘≈À…
 Group(uk):	‚¶¬Ã¶œ‘≈À…
-Source0:	http://www.vorbis.com/files/rc2/unix/%{name}-%{version}.tar.gz
+Source0:	http://www.xiph.org/ogg/vorbis/download/%{name}-%{version}.tar.gz
 PAtch0:		%{name}-ac_am_fixes.patch
 URL:		http://www.xiph.org/
 BuildRequires:	libtool
@@ -153,6 +153,25 @@ Arts plugin for esd.
 %description -l pl esd
 Wtyczka esd dla libao.
 
+%package alsa
+Summary:	ALSA plugin for libao
+Summary(pl):	Wtyczka ALSA dla libao
+Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
+Group(fr):	Librairies
+Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	‚…¬Ã…œ‘≈À…
+Group(uk):	‚¶¬Ã¶œ‘≈À…
+Requires:	libao = %{version}
+
+%description alsa
+ALSA plugin for libao.
+
+%description -l pl alsa
+Wtyczka ALSA dla libao.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -194,8 +213,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc *.gz
 %attr(755,root,root) %{_libdir}/libao.so.*.*
 %dir %{_libdir}/ao
-%attr(755,root,root) %{_libdir}/ao/liboss.so
-%attr(755,root,root) %{_libdir}/ao/liboss.la
+%dir %{_libdir}/ao/plugins-2
+%attr(755,root,root) %{_libdir}/ao/plugins-2/liboss.so
+%attr(755,root,root) %{_libdir}/ao/plugins-2/liboss.la
 %{_mandir}/man5/*
 
 %files devel
@@ -213,11 +233,18 @@ rm -rf $RPM_BUILD_ROOT
 %if %{?_without_arts:0}%{!?_without_arts:1}
 %files arts
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/libarts.so
-%attr(755,root,root) %{_libdir}/ao/libarts.la
+%attr(755,root,root) %{_libdir}/ao/plugins-2/libarts.so
+%attr(755,root,root) %{_libdir}/ao/plugins-2/libarts.la
 %endif
 
 %files esd
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/libesd.so
-%attr(755,root,root) %{_libdir}/ao/libesd.la
+%attr(755,root,root) %{_libdir}/ao/plugins-2/libesd.so
+%attr(755,root,root) %{_libdir}/ao/plugins-2/libesd.la
+
+%ifnarch sparc sparc64
+%files alsa
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa.so
+%attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa.la
+%endif
