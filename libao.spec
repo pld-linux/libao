@@ -10,13 +10,14 @@ Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
 Summary(pt_BR):	Biblioteca libao
 Name:		libao
 Version:	0.8.4
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Vendor:		Xiphophorus <team@xiph.org>
 Group:		Libraries
 Source0:	http://www.xiph.org/ao/src/%{name}-%{version}.tar.gz
 # Source0-md5:	0525549b0bf665f617913c916064cc87
+Patch0:		%{name}-am18.patch
 URL:		http://www.xiph.org/
 %{?with_alsa:BuildRequires:	alsa-lib-devel}
 %{?with_arts:BuildRequires:	artsc-devel}
@@ -147,6 +148,7 @@ Wtyczka libao dla Network Audio System (NAS).
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 rm -f missing acinclude.m4
