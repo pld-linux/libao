@@ -1,5 +1,5 @@
 #
-# Conditional build:
+# Conditional build:	
 # bcond_off_alsa - without ALSA support
 #
 Summary:	Cross Platform Audio Output Library
@@ -7,14 +7,17 @@ Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
 Name:		libao
 Version:	1.0.0_cvs2000.10.29
 Release:	1
-Group:		Libraries/Multimedia
-Group(pl):	Biblioteki/Multimedia
-Copyright:	GPL
-URL:		http://www.xiph.org/
+License:	GPL
 Vendor:		Xiphophorus <team@xiph.org>
-Source:		ftp://www.xiph.org/ogg/vorbis/download/vorbis_nightly_cvs.tgz
+Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
+Group(fr):	Librairies
+Group(pl):	Biblioteki
+Source0:	ftp://www.xiph.org/ogg/vorbis/download/vorbis_nightly_cvs.tgz
 Patch0:		%{name}-make.patch
 Patch1:		%{name}-opt.patch
+URL:		http://www.xiph.org/
 BuildRequires:	esound-devel
 %{!?bcond_off_alsa:BuildRequires:	alsa-lib-devel}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -24,13 +27,14 @@ libao is a cross platform audio output library. It currently supports
 ESD, OSS, Solaris, and IRIX.
 
 %description -l pl
-libao jest miêdzyplatformow± bibliotek± do odtwarzania d¼wiêku. Aktualnie
-wspiera ESD, OSS, Solaris i IRIX.
+libao jest miêdzyplatformow± bibliotek± do odtwarzania d¼wiêku.
+Aktualnie wspiera ESD, OSS, Solaris i IRIX.
 
 %package devel
-Summary: 	Cross Platform Audio Output Library Development
+Summary:	Cross Platform Audio Output Library Development
 Summary(pl):	Czê¶æ dla programistów biblioteki libao
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
@@ -47,6 +51,7 @@ do kompilowania aplikacji korzystaj±cych z libao.
 Summary:	Cross Platform Autio Output Static Library
 Summary(pl):	Statyczna biblioteka libao
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
@@ -72,27 +77,27 @@ CFLAGS="%{rpmcflags} -ffast-math -D_REENTRANT -fsigned-char"
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 gzip -9nf AUTHORS CHANGES README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
+%post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
-%attr(755,root,root) %{_libdir}/libao.so.*
+%attr(755,root,root) %{_libdir}/libao.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/index.html
+%doc *.gz doc/index.html
 %attr(755,root,root) %{_libdir}/libao.so
 %attr(755,root,root) %{_libdir}/libao.la
 %{_includedir}/ao
 
 %files static
-%attr(644,root,root) %{_libdir}/*.a
+%defattr(644,root,root,755)
+%{_libdir}/*.a
