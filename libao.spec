@@ -61,7 +61,7 @@ Linux Sound Architecture), Solaris (untested), IRIX (untested).
 Summary:	Cross Platform Audio Output Library Development
 Summary(pl):	Czê¶æ dla programistów biblioteki libao
 Group:		Development/Libraries
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	libao2-devel
 
 %description devel
@@ -84,7 +84,7 @@ Summary(es):	Bibliotecas estáticas
 Summary(pl):	Statyczna biblioteka libao
 Summary(pt_BR):	Bibliotecas estáticas
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{epoch}:%{version}
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
 The libao-static package contains the static libraries of libao.
@@ -102,7 +102,7 @@ Biblioteca de audio Libao.
 Summary:	Arts plugin for libao
 Summary(pl):	Wtyczka arts dla libao
 Group:		Libraries
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description arts
 Arts plugin for libao.
@@ -114,7 +114,7 @@ Wtyczka arts dla libao.
 Summary:	ESD plugin for libao
 Summary(pl):	Wtyczka ESD dla libao
 Group:		Libraries
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description esd
 Arts plugin for ESD.
@@ -126,7 +126,7 @@ Wtyczka esd dla libao.
 Summary:	Advanced Linux Sound Architecture (ALSA) plugin for libao
 Summary(pl):	Wtyczka libao dla Advanced Linux Sound Architecture (ALSA)
 Group:		Libraries
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description alsa
 Advanced Linux Sound Architecture (ALSA) plugin for libao.
@@ -138,7 +138,7 @@ Wtyczka libao dla Advanced Linux Sound Architecture (ALSA).
 Summary:	Network Audio System (NAS) plugin for libao
 Summary(pl):	Wtyczka libao dla Network Audio System (NAS)
 Group:		Libraries
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description nas
 Network Audio System (NAS) plugin for libao.
