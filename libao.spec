@@ -15,6 +15,7 @@ License:	GPL
 Vendor:		Xiphophorus <team@xiph.org>
 Group:		Libraries
 Source0:	http://www.xiph.org/ogg/vorbis/download/%{name}-%{version}.tar.gz
+# Source0-md5: b1422a6ff7f58131921b9f2fabe2295c
 Patch0:		%{name}-ac_am_fixes.patch
 URL:		http://www.xiph.org/
 %ifnarch sparc sparc64
