@@ -4,7 +4,9 @@
 # _without_arts - without aRts support
 #
 Summary:	Cross Platform Audio Output Library
+Summary(es):	Biblioteca libao
 Summary(pl):	MiÍdzyplatformowa biblioteka do odtwarzania dºwiÍku
+Summary(pt_BR):	Biblioteca libao
 Name:		libao
 Version:	0.8.0
 Release:	2
@@ -16,6 +18,9 @@ Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	‚…¬Ã…œ‘≈À…
+Group(uk):	‚¶¬Ã¶œ‘≈À…
 Source0:	http://www.vorbis.com/files/rc2/unix/%{name}-%{version}.tar.gz
 PAtch0:		%{name}-ac_am_fixes.patch
 URL:		http://www.xiph.org/
@@ -30,44 +35,85 @@ BuildRequires:	esound-devel >= 0.2.8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-libao is a cross platform audio output library. It currently supports
-ESD, OSS, Solaris, and IRIX.
+Libao is a cross-platform audio library that allows programs to output
+audio using a simple API on a wide variety of platforms. It currently
+supports: Null output, WAV files, OSS (Open Sound System), ESD (ESounD
+or Enlighten Sound Daemon), ALSA (Advanced Linux Sound Architecture),
+Solaris (untested), IRIX (untested)
+
+%description -l es
+Libaso es un biblioteca de audio que soporta programas com salida de
+audio usando una API simplificada en una gran variedad de
+arquiteturas. Hoy soporta Null output, WAV files, OSS (Open Sound
+System), ESD (ESounD or Enlighten Sound Daemon), ALSA (Advanced Linux
+Sound Architecture), Solaris (untested), IRIX (untested).
 
 %description -l pl
 libao jest miÍdzyplatformow± bibliotek± do odtwarzania dºwiÍku.
 Aktualnie wspiera ESD, OSS, Solaris i IRIX.
 
+%description -l pt_BR
+Libao È uma biblioteca de audio multi-plataforma que permite programas
+para saida de audio usando uma API simples em uma variedade grande de
+plataformas. Atualmente suporta Null output, WAV files, OSS (Open
+Sound System), ESD (ESounD or Enlighten Sound Daemon), ALSA (Advanced
+Linux Sound Architecture), Solaris (untested), IRIX (untested).
+
 %package devel
 Summary:	Cross Platform Audio Output Library Development
+Summary(es):	Biblioteca
 Summary(pl):	CzÍ∂Ê dla programistÛw biblioteki libao
+Summary(pt_BR):	Bibliotecas 
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
+Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
 Requires:	%{name} = %{version}
 
 %description devel
 The libao-devel package contains the header files and documentation
 needed to develop applications with libao.
 
+%description -l es devel
+Biblioteca y archivos de inclusiÛn.
+
 %description devel -l pl
 Pakiet libao-devel zawiera pliki nag≥Ûwkowe i dokumentacjÍ, potrzebne
 do kompilowania aplikacji korzystaj±cych z libao.
 
+%description -l pt_BR devel
+Bibliotecas e arquivos de inclus„o.
+
 %package static
 Summary:	Cross Platform Autio Output Static Library
+Summary(es):	Bibliotecas est·ticas
 Summary(pl):	Statyczna biblioteka libao
+Summary(pt_BR):	Bibliotecas est·ticas
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
+Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
 Requires:	%{name}-devel = %{version}
 
 %description static
 The libao-static package contains the static libraries of libao.
 
+%description -l es static
+Biblioteca de audio Libao.
+
 %description static -l pl
 Statyczna wersja biblioteki libao.
+
+%description -l pt_BR static
+Biblioteca de audio Libao.
 
 %package arts
 Summary:	Arts plugin for libao
@@ -77,6 +123,9 @@ Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	‚…¬Ã…œ‘≈À…
+Group(uk):	‚¶¬Ã¶œ‘≈À…
 Requires:	libao = %{version}
 
 %description arts
@@ -93,6 +142,9 @@ Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	‚…¬Ã…œ‘≈À…
+Group(uk):	‚¶¬Ã¶œ‘≈À…
 Requires:	libao = %{version}
 
 %description esd
