@@ -172,14 +172,14 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/ao
 %dir %{_libdir}/ao/plugins-2
 %attr(755,root,root) %{_libdir}/ao/plugins-2/liboss.so
-%attr(755,root,root) %{_libdir}/ao/plugins-2/liboss.la
+%{_libdir}/ao/plugins-2/liboss.la
 %{_mandir}/man5/*
 
 %files devel
 %defattr(644,root,root,755)
 %doc doc/*{html,css}
 %attr(755,root,root) %{_libdir}/libao.so
-%attr(755,root,root) %{_libdir}/libao.la
+%{_libdir}/libao.la
 %{_includedir}/ao
 %{_aclocaldir}/*
 
@@ -191,19 +191,19 @@ rm -rf $RPM_BUILD_ROOT
 %files arts
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libarts.so
-%attr(755,root,root) %{_libdir}/ao/plugins-2/libarts.la
+%{_libdir}/ao/plugins-2/libarts.la
 %endif
 
 %files esd
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libesd.so
-%attr(755,root,root) %{_libdir}/ao/plugins-2/libesd.la
+%{_libdir}/ao/plugins-2/libesd.la
 
 %if %{?_without_alsa:0}%{!?_without_alsa:1}
 %ifnarch sparc sparc64
 %files alsa
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa*.so
-%attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa*.la
+%{_libdir}/ao/plugins-2/libalsa*.la
 %endif
 %endif
