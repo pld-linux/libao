@@ -9,17 +9,17 @@ Summary(es):	Biblioteca libao
 Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
 Summary(pt_BR):	Biblioteca libao
 Name:		libao
-Version:	0.8.4
-Release:	3
+Version:	0.8.5
+Release:	1
 Epoch:		1
 License:	GPL
 Vendor:		Xiphophorus <team@xiph.org>
 Group:		Libraries
 Source0:	http://www.xiph.org/ao/src/%{name}-%{version}.tar.gz
-# Source0-md5:	0525549b0bf665f617913c916064cc87
+# Source0-md5:	dd72b66f5f29361411bda465470b65e2
 Patch0:		%{name}-am18.patch
 URL:		http://www.xiph.org/
-%{?with_alsa:BuildRequires:	alsa-lib-devel}
+%{?with_alsa:BuildRequires:	alsa-lib-devel >= 1.0.0}
 %{?with_arts:BuildRequires:	artsc-devel}
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -156,8 +156,6 @@ rm -f acinclude.m4
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-# for ALSA 1.0
-CPPFLAGS="-DALSA_PCM_OLD_HW_PARAMS_API"
 %configure \
 %if %{without alsa}
 	--disable-alsa \
