@@ -138,8 +138,8 @@ Wtyczka ALSA dla libao.
 rm -f missing acinclude.m4
 libtoolize --copy --force
 aclocal
-autoconf
-automake -a -c -f
+%{__autoconf}
+%{__automake}
 %configure \
 %ifnarch sparc sparc64
 	%{?_without_alsa:--disable-alsa} \
