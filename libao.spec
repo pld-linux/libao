@@ -8,15 +8,14 @@ Summary(es):	Biblioteca libao
 Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
 Summary(pt_BR):	Biblioteca libao
 Name:		libao
-Version:	0.8.2
-Release:	3
+Version:	0.8.3
+Release:	1
 Epoch:		1
 License:	GPL
 Vendor:		Xiphophorus <team@xiph.org>
 Group:		Libraries
 Source0:	http://www.xiph.org/ogg/vorbis/download/%{name}-%{version}.tar.gz
 Patch0:		%{name}-ac_am_fixes.patch
-Patch1:		%{name}-libdep.patch
 URL:		http://www.xiph.org/
 BuildRequires:	libtool
 BuildRequires:	automake
@@ -132,7 +131,6 @@ Wtyczka ALSA dla libao.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 rm -f missing acinclude.m4
