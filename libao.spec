@@ -200,7 +200,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/*{html,css}
+%doc doc/*{html,css,c}
 %attr(755,root,root) %{_libdir}/libao.so
 %{_libdir}/libao.la
 %{_includedir}/ao
