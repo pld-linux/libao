@@ -1,0 +1,89 @@
+--- libao-0.8.0/configure.in~	Mon Aug 13 05:43:18 2001
++++ libao-0.8.0/configure.in	Sun Aug 19 00:42:29 2001
+@@ -26,54 +26,6 @@
+ AC_LIBTOOL_DLOPEN
+ AM_PROG_LIBTOOL
+ 
+-dnl ====================================
+-dnl Set some general compile options
+-dnl ====================================
+-
+-cflags_save="$CFLAGS"
+-ldflags_save="$LDFLAGS"
+-if test -z "$GCC"; then
+-        case $host in
+-        *-*-irix*)
+-                if test -z "$CC"; then
+-                        CC=cc
+-                fi
+-                DEBUG="-g -signed"
+-                CFLAGS="-O2 -w -signed"
+-                PROFILE="-p -g3 -O2 -signed" ;;
+-        sparc-sun-solaris*)
+-                DEBUG="-v -g"
+-                CFLAGS="-xO4 -fast -w -fsimple -native -xcg92"
+-                PROFILE="-v -xpg -g -xO4 -fast -native -fsimple -xcg92 -Dsuncc" ;;
+-        *)
+-                DEBUG="-g"
+-                CFLAGS="-O"
+-                PROFILE="-g -p" ;;
+-        esac
+-else
+-
+-        case $host in
+-        *-*-linux*)
+-                DEBUG="-g -Wall -D_REENTRANT -D__NO_MATH_INLINES -fsigned-char"
+-                CFLAGS="-O20 -ffast-math -D_REENTRANT -fsigned-char"
+-                PROFILE="-pg -g -O20 -ffast-math -D_REENTRANT -fsigned-char";;
+-        sparc-sun-*)
+-                DEBUG="-g -Wall -D__NO_MATH_INLINES -fsigned-char -mv8"
+-                CFLAGS="-O20 -ffast-math -D__NO_MATH_INLINES -fsigned-char -mv8"
+-                PROFILE="-pg -g -O20 -D__NO_MATH_INLINES -fsigned-char -mv8" ;;
+-        *)
+-                DEBUG="-g -Wall -D__NO_MATH_INLINES -fsigned-char"
+-                CFLAGS="-O20 -D__NO_MATH_INLINES -fsigned-char"
+-                PROFILE="-O20 -g -pg -D__NO_MATH_INLINES -fsigned-char" ;;
+-        esac
+-fi
+-CFLAGS="$CFLAGS $cflags_save"
+-LDFLAGS="$LDFLAGS $ldflags_save"
+-
+-
+-AC_SUBST(DEBUG)
+-AC_SUBST(PROFILE)
+-
+ dnl ==============================
+ dnl Check for libraries
+ dnl ==============================
+@@ -83,21 +35,6 @@
+ AC_CHECK_LIB(pthread, pthread_kill)
+ 
+ dnl ==============================
+-dnl Checks for header files
+-dnl ==============================
+-
+-dnl --------------------------------------------------
+-dnl Work around FHS stupidity
+-dnl --------------------------------------------------
+-
+-if test "$prefix" = "/usr"; then
+-    MANDIR='$(datadir)/man'
+-else
+-    MANDIR='$(prefix)/man'
+-fi
+-AC_SUBST(MANDIR)
+-
+-dnl ==============================
+ dnl Checks for types
+ dnl ==============================
+ 
+--- libao-0.8.0/Makefile.am~	Sun Aug  5 00:36:57 2001
++++ libao-0.8.0/Makefile.am	Sun Aug 19 00:55:58 2001
+@@ -6,7 +6,6 @@
+ 
+ m4datadir = $(datadir)/aclocal
+ m4data_DATA = ao.m4
+-mandir = @MANDIR@
+ man_MANS = libao.conf.5
+ 
+ EXTRA_DIST = README AUTHORS CHANGES COPYING libao.spec ao.m4 acinclude.m4 $(man_MANS)
