@@ -19,7 +19,7 @@ Source0:	http://www.xiph.org/ao/src/%{name}-%{version}.tar.gz
 # Source0-md5:	0525549b0bf665f617913c916064cc87
 URL:		http://www.xiph.org/
 %{?with_alsa:BuildRequires:	alsa-lib-devel}
-%{?with_arts:BuildRequires:	arts-devel}
+%{?with_arts:BuildRequires:	artsc-devel}
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	esound-devel >= 0.2.8
