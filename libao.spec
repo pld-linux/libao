@@ -9,7 +9,7 @@ Summary(pl):	MiÍdzyplatformowa biblioteka do odtwarzania dºwiÍku
 Summary(pt_BR):	Biblioteca libao
 Name:		libao
 Version:	0.8.2
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Vendor:		Xiphophorus <team@xiph.org>
@@ -62,9 +62,7 @@ Linux Sound Architecture), Solaris (untested), IRIX (untested).
 
 %package devel
 Summary:	Cross Platform Audio Output Library Development
-Summary(es):	Biblioteca
 Summary(pl):	CzÍ∂Ê dla programistÛw biblioteki libao
-Summary(pt_BR):	Bibliotecas 
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(es):	Desarrollo/Bibliotecas
@@ -79,14 +77,14 @@ Requires:	%{name} = %{version}
 The libao-devel package contains the header files and documentation
 needed to develop applications with libao.
 
-%description -l es devel
+%description devel -l es
 Biblioteca y archivos de inclusiÛn.
 
 %description devel -l pl
 Pakiet libao-devel zawiera pliki nag≥Ûwkowe i dokumentacjÍ, potrzebne
 do kompilowania aplikacji korzystaj±cych z libao.
 
-%description -l pt_BR devel
+%description devel -l pt_BR
 Bibliotecas e arquivos de inclus„o.
 
 %package static
@@ -107,13 +105,13 @@ Requires:	%{name}-devel = %{version}
 %description static
 The libao-static package contains the static libraries of libao.
 
-%description -l es static
+%description static -l es
 Biblioteca de audio Libao.
 
 %description static -l pl
 Statyczna wersja biblioteki libao.
 
-%description -l pt_BR static
+%description static -l pt_BR
 Biblioteca de audio Libao.
 
 %package arts
@@ -127,12 +125,12 @@ Group(pl):	Biblioteki
 Group(pt_BR):	Bibliotecas
 Group(ru):	‚…¬Ã…œ‘≈À…
 Group(uk):	‚¶¬Ã¶œ‘≈À…
-Requires:	libao = %{version}
+Requires:	%{name} = %{version}
 
 %description arts
 Arts plugin for libao.
 
-%description -l pl arts
+%description arts -l pl
 Wtyczka arts dla libao.
 
 %package esd
@@ -146,12 +144,12 @@ Group(pl):	Biblioteki
 Group(pt_BR):	Bibliotecas
 Group(ru):	‚…¬Ã…œ‘≈À…
 Group(uk):	‚¶¬Ã¶œ‘≈À…
-Requires:	libao = %{version}
+Requires:	%{name} = %{version}
 
 %description esd
 Arts plugin for esd.
 
-%description -l pl esd
+%description esd -l pl
 Wtyczka esd dla libao.
 
 %package alsa
@@ -170,7 +168,7 @@ Requires:	libao = %{version}
 %description alsa
 ALSA plugin for libao.
 
-%description -l pl alsa
+%description alsa -l pl
 Wtyczka ALSA dla libao.
 
 %prep
@@ -244,9 +242,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libesd.so
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libesd.la
 
+%if %{?_without_alsa:0}%{!?_without_alsa:1}
 %ifnarch sparc sparc64
 %files alsa
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa.so
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa.la
+%endif
 %endif
