@@ -21,7 +21,9 @@ BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	esound-devel >= 0.2.8
 BuildRequires:	arts-devel
+%ifnarch sparc sparc64
 %{!?_without_alsa:BuildRequires:	alsa-lib-devel}
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -106,8 +108,10 @@ aclocal
 autoconf
 automake -a -c
 %configure \
+%ifnarch sparc sparc64
 	%{?_without_alsa:--disable-alsa} \
 	%{?!_without_alsa:--enable-alsa} \
+%endif
 	--enable-shared \
 	--enable-static
 
