@@ -1,5 +1,5 @@
 #
-# Conditional build:	
+# Conditional build:
 # _without_alsa - without ALSA support
 # _without_arts - without aRts support
 #
