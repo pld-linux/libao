@@ -4,7 +4,7 @@
 %bcond_without	arts		# don't build aRts plugin
 %bcond_without	nas 		# don't build NAS plugin
 %bcond_without	polypaudio	# don't build Polypaudio plugin
-%bcond_without	static	# don't build static library
+%bcond_without	static		# don't build static library
 #
 Summary:	Cross Platform Audio Output Library
 Summary(es):	Biblioteca libao
@@ -185,8 +185,7 @@ rm -f acinclude.m4
 %if %{without polypaudio}
 	--disable-polyp \
 %endif
-	--enable-static \
-	%{!?with_static:--disable-static}
+	--%{!?with_static:dis}%{?with_static:en}able-static
 
 %{__make}
 
