@@ -4,7 +4,7 @@
 %bcond_without	arts		# don't build aRts plugin
 %bcond_without	nas 		# don't build NAS plugin
 %bcond_without	polypaudio	# don't build Polypaudio plugin
-%bcond_without	static		# don't build static library
+%bcond_without	static_libs		# don't build static library
 #
 Summary:	Cross Platform Audio Output Library
 Summary(es):	Biblioteca libao
@@ -185,7 +185,7 @@ rm -f acinclude.m4
 %if %{without polypaudio}
 	--disable-polyp \
 %endif
-	--%{!?with_static:dis}%{?with_static:en}able-static
+	--%{!?with_static_libs:dis}%{?with_static_libs:en}able-static
 
 %{__make}
 
@@ -222,7 +222,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_aclocaldir}/ao.m4
 %{_pkgconfigdir}/*.pc
 
-%if %{with static}
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
