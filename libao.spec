@@ -15,7 +15,6 @@ Version:	0.8.6
 Release:	1
 Epoch:		1
 License:	GPL v2+
-Vendor:		Xiphophorus <team@xiph.org>
 Group:		Libraries
 Source0:	http://downloads.xiph.org/releases/ao/%{name}-%{version}.tar.gz
 # Source0-md5:	12e136a4c0995068ff134997c84421ed
@@ -178,7 +177,7 @@ rm -f acinclude.m4
 %endif
 %if %{without arts}
 	--disable-arts \
-%endif	
+%endif
 %if %{without nas}
 	--disable-nas \
 %endif
@@ -234,7 +233,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa*.so
 %endif
 
-%if %{with arts} 
+%if %{with arts}
 %files arts
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libarts.so
@@ -248,10 +247,10 @@ rm -rf $RPM_BUILD_ROOT
 %files nas
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libnas.so
-%endif 
+%endif
 
 %if %{with polypaudio}
 %files polyp
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libpolyp.so
-%endif 
+%endif
