@@ -12,12 +12,13 @@ Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
 Summary(pt_BR):	Biblioteca libao
 Name:		libao
 Version:	0.8.6
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://downloads.xiph.org/releases/ao/%{name}-%{version}.tar.gz
 # Source0-md5:	12e136a4c0995068ff134997c84421ed
+Patch0:		%{name}-polypaudio-0_8.patch
 URL:		http://www.xiph.org/ao/
 %{?with_alsa:BuildRequires:	alsa-lib-devel >= 1.0.0}
 %{?with_arts:BuildRequires:	artsc-devel}
@@ -26,7 +27,7 @@ BuildRequires:	automake
 BuildRequires:	esound-devel >= 0.2.8
 BuildRequires:	libtool
 %{?with_nas:BuildRequires:	nas-devel}
-%{?with_polypaudio:BuildRequires:	polypaudio-devel >= 0.6}
+%{?with_polypaudio:BuildRequires:	polypaudio-devel >= 0.8}
 Obsoletes:	libao2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -161,6 +162,7 @@ Wtyczka Polypaudio dla libao.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 # just AM_PATH_ESD copy
