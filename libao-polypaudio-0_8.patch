@@ -1,0 +1,12 @@
+--- libao-0.8.6/src/plugins/polyp/ao_polyp.c.orig	2004-11-09 09:20:26.000000000 +0100
++++ libao-0.8.6/src/plugins/polyp/ao_polyp.c	2006-04-27 22:06:27.000000000 +0200
+@@ -28,7 +28,8 @@
+ #include <signal.h>
+ #include <limits.h>
+ 
+-#include <polyp/polyplib-simple.h>
++#include <polyp/context.h>
++#include <polyp/stream.h>
+ #include <ao/ao.h>
+ #include <ao/plugin.h>
+ 
