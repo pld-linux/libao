@@ -3,8 +3,8 @@
 %bcond_without	alsa		# don't build ALSA plugin
 %bcond_without	arts		# don't build aRts plugin
 %bcond_without	nas 		# don't build NAS plugin
-%bcond_without	polypaudio	# don't build Polypaudio plugin
-%bcond_without	static_libs		# don't build static library
+%bcond_with	polypaudio	# build Polypaudio plugin (obsoleted by libao-pulse)
+%bcond_without	static_libs	# don't build static library
 #
 Summary:	Cross Platform Audio Output Library
 Summary(es):	Biblioteca libao
