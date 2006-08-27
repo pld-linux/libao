@@ -12,7 +12,7 @@ Summary(pl):	Miêdzyplatformowa biblioteka do odtwarzania d¼wiêku
 Summary(pt_BR):	Biblioteca libao
 Name:		libao
 Version:	0.8.6
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL v2+
 Group:		Libraries
