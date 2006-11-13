@@ -172,18 +172,18 @@ rm -f acinclude.m4
 %{__autoconf}
 %{__automake}
 %configure \
-%if %{without alsa}
+%if !%{with alsa}
 	--disable-alsa \
 %else
 	--enable-alsa \
 %endif
-%if %{without arts}
+%if !%{with arts}
 	--disable-arts \
 %endif
-%if %{without nas}
+%if !%{with nas}
 	--disable-nas \
 %endif
-%if %{without polypaudio}
+%if !%{with polypaudio}
 	--disable-polyp \
 %endif
 	--%{!?with_static_libs:dis}%{?with_static_libs:en}able-static
