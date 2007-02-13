@@ -7,9 +7,9 @@
 %bcond_without	static_libs	# don't build static library
 #
 Summary:	Cross Platform Audio Output Library
-Summary(es.UTF-8):   Biblioteca libao
-Summary(pl.UTF-8):   Międzyplatformowa biblioteka do odtwarzania dźwięku
-Summary(pt_BR.UTF-8):   Biblioteca libao
+Summary(es.UTF-8):	Biblioteca libao
+Summary(pl.UTF-8):	Międzyplatformowa biblioteka do odtwarzania dźwięku
+Summary(pt_BR.UTF-8):	Biblioteca libao
 Name:		libao
 Version:	0.8.6
 Release:	4
@@ -61,7 +61,7 @@ Linux Sound Architecture), Solaris (untested), IRIX (untested).
 
 %package devel
 Summary:	Cross Platform Audio Output Library Development
-Summary(pl.UTF-8):   Część dla programistów biblioteki libao
+Summary(pl.UTF-8):	Część dla programistów biblioteki libao
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	libao2-devel
@@ -82,9 +82,9 @@ Bibliotecas e arquivos de inclusão.
 
 %package static
 Summary:	Cross Platform Autio Output Static Library
-Summary(es.UTF-8):   Bibliotecas estáticas
-Summary(pl.UTF-8):   Statyczna biblioteka libao
-Summary(pt_BR.UTF-8):   Bibliotecas estáticas
+Summary(es.UTF-8):	Bibliotecas estáticas
+Summary(pl.UTF-8):	Statyczna biblioteka libao
+Summary(pt_BR.UTF-8):	Bibliotecas estáticas
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
@@ -102,7 +102,7 @@ Biblioteca de audio Libao.
 
 %package alsa
 Summary:	Advanced Linux Sound Architecture (ALSA) plugin for libao
-Summary(pl.UTF-8):   Wtyczka libao dla Advanced Linux Sound Architecture (ALSA)
+Summary(pl.UTF-8):	Wtyczka libao dla Advanced Linux Sound Architecture (ALSA)
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -114,7 +114,7 @@ Wtyczka libao dla Advanced Linux Sound Architecture (ALSA).
 
 %package arts
 Summary:	Arts plugin for libao
-Summary(pl.UTF-8):   Wtyczka arts dla libao
+Summary(pl.UTF-8):	Wtyczka arts dla libao
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -126,7 +126,7 @@ Wtyczka arts dla libao.
 
 %package esd
 Summary:	ESD plugin for libao
-Summary(pl.UTF-8):   Wtyczka ESD dla libao
+Summary(pl.UTF-8):	Wtyczka ESD dla libao
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -138,7 +138,7 @@ Wtyczka esd dla libao.
 
 %package nas
 Summary:	Network Audio System (NAS) plugin for libao
-Summary(pl.UTF-8):   Wtyczka libao dla Network Audio System (NAS)
+Summary(pl.UTF-8):	Wtyczka libao dla Network Audio System (NAS)
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -150,7 +150,7 @@ Wtyczka libao dla Network Audio System (NAS).
 
 %package polyp
 Summary:	Polypaudio plugin for libao
-Summary(pl.UTF-8):   Wtyczka Polypaudio dla libao
+Summary(pl.UTF-8):	Wtyczka Polypaudio dla libao
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
