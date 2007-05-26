@@ -3,7 +3,7 @@
 %bcond_without	alsa		# don't build ALSA plugin
 %bcond_without	arts		# don't build aRts plugin
 %bcond_without	nas 		# don't build NAS plugin
-%bcond_with	polypaudio	# build Polypaudio plugin (obsoleted by libao-pulse)
+%bcond_with	pulseaudio	# build Pulseaudio plugin (currently available in libao-pulse.spec)
 %bcond_without	static_libs	# don't build static library
 #
 Summary:	Cross Platform Audio Output Library
@@ -11,23 +11,23 @@ Summary(es.UTF-8):	Biblioteca libao
 Summary(pl.UTF-8):	Międzyplatformowa biblioteka do odtwarzania dźwięku
 Summary(pt_BR.UTF-8):	Biblioteca libao
 Name:		libao
-Version:	0.8.6
-Release:	4
+Version:	0.8.8
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://downloads.xiph.org/releases/ao/%{name}-%{version}.tar.gz
-# Source0-md5:	12e136a4c0995068ff134997c84421ed
-Patch0:		%{name}-polypaudio-0_8.patch
+# Source0-md5:	b92cba3cbcf1ee9bc221118a85d23dcd
 URL:		http://www.xiph.org/ao/
 %{?with_alsa:BuildRequires:	alsa-lib-devel >= 1.0.0}
 %{?with_arts:BuildRequires:	artsc-devel}
-BuildRequires:	autoconf
-BuildRequires:	automake
+BuildRequires:	autoconf >= 2.50
+BuildRequires:	automake >= 1.6
 BuildRequires:	esound-devel >= 0.2.8
 BuildRequires:	libtool
 %{?with_nas:BuildRequires:	nas-devel}
-%{?with_polypaudio:BuildRequires:	polypaudio-devel >= 0.8}
+BuildRequires:	pkgconfig
+%{?with_pulseaudio:BuildRequires:	pulseaudio-devel >= 0.9}
 Obsoletes:	libao2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -148,21 +148,21 @@ Network Audio System (NAS) plugin for libao.
 %description nas -l pl.UTF-8
 Wtyczka libao dla Network Audio System (NAS).
 
-%package polyp
-Summary:	Polypaudio plugin for libao
-Summary(pl.UTF-8):	Wtyczka Polypaudio dla libao
+%package pulse
+Summary:	Pulseaudio plugin for libao
+Summary(pl.UTF-8):	Wtyczka Pulseaudio dla libao
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Obsoletes:	libao-polyp
 
-%description polyp
-Polypaudio plugin for libao.
+%description pulse
+Pulseaudio plugin for libao.
 
-%description polyp -l pl.UTF-8
-Wtyczka Polypaudio dla libao.
+%description pulse -l pl.UTF-8
+Wtyczka Pulseaudio dla libao.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 # just AM_PATH_ESD copy
@@ -183,8 +183,8 @@ rm -f acinclude.m4
 %if !%{with nas}
 	--disable-nas \
 %endif
-%if !%{with polypaudio}
-	--disable-polyp \
+%if !%{with pulseaudio}
+	--disable-pulse \
 %endif
 	--%{!?with_static_libs:dis}%{?with_static_libs:en}able-static
 
@@ -251,8 +251,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/ao/plugins-2/libnas.so
 %endif
 
-%if %{with polypaudio}
-%files polyp
+%if %{with pulseaudio}
+%files pulse
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-2/libpolyp.so
+%attr(755,root,root) %{_libdir}/ao/plugins-2/libpulse.so
 %endif
