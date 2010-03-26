@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_without	alsa		# don't build ALSA plugin
-%bcond_without	arts		# don't build aRts plugin
+%bcond_with	arts		# build aRts plugin
 %bcond_without	nas 		# don't build NAS plugin
 %bcond_with	pulseaudio	# build Pulseaudio plugin (currently available in libao-pulse.spec)
 %bcond_without	static_libs	# don't build static library
@@ -12,7 +12,7 @@ Summary(pl.UTF-8):	Międzyplatformowa biblioteka do odtwarzania dźwięku
 Summary(pt_BR.UTF-8):	Biblioteca libao
 Name:		libao
 Version:	0.8.8
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL v2+
 Group:		Libraries
