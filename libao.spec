@@ -28,6 +28,7 @@ BuildRequires:	libtool
 %{?with_nas:BuildRequires:	nas-devel}
 BuildRequires:	pkgconfig
 %{?with_pulseaudio:BuildRequires:	pulseaudio-devel >= 0.9}
+%{?with_nas:BuildRequires:	xorg-lib-libXau-devel}
 Obsoletes:	libao2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -46,11 +47,12 @@ System), ESD (ESounD or Enlighten Sound Daemon), ALSA (Advanced Linux
 Sound Architecture), Solaris (untested), IRIX (untested).
 
 %description -l pl.UTF-8
-Libao jest biblioteką do odtwarzania dźwięku, która ma proste API i jest
-dostępna na wielu różnych platformach.  Aktualnie wspiera odtwarzanie na
-urządzenie puste (null output), do plików w formacie WAV, do demona ESD
-(ESounD tudzież Enlighten Sound Daemon) oraz urządzenia ALSA (Advanced
-Linux Sound Architecture), OSS (Open Sound System), Solaris i IRIX.
+Libao jest biblioteką do odtwarzania dźwięku, która ma proste API i
+jest dostępna na wielu różnych platformach. Aktualnie wspiera
+odtwarzanie na urządzenie puste (null output), do plików w formacie
+WAV, do demona ESD (ESounD tudzież Enlighten Sound Daemon) oraz
+urządzenia ALSA (Advanced Linux Sound Architecture), OSS (Open Sound
+System), Solaris i IRIX.
 
 %description -l pt_BR.UTF-8
 Libao é uma biblioteca de audio multi-plataforma que permite programas
