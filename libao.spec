@@ -1,3 +1,4 @@
+# TODO: roaraudio plugin (needs roaraudio: http://roaraudio.keep-cool.org/downloads.html)
 #
 # Conditional build:
 %bcond_without	alsa		# don't build ALSA plugin
@@ -11,13 +12,13 @@ Summary(es.UTF-8):	Biblioteca libao
 Summary(pl.UTF-8):	Międzyplatformowa biblioteka do odtwarzania dźwięku
 Summary(pt_BR.UTF-8):	Biblioteca libao
 Name:		libao
-Version:	0.8.8
-Release:	2
+Version:	1.0.0
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://downloads.xiph.org/releases/ao/%{name}-%{version}.tar.gz
-# Source0-md5:	b92cba3cbcf1ee9bc221118a85d23dcd
+# Source0-md5:	08283fbe1f587619053a156254afecec
 URL:		http://www.xiph.org/ao/
 %{?with_alsa:BuildRequires:	alsa-lib-devel >= 1.0.0}
 %{?with_arts:BuildRequires:	artsc-devel}
@@ -167,8 +168,6 @@ Wtyczka Pulseaudio dla libao.
 %setup -q
 
 %build
-# just AM_PATH_ESD copy
-rm -f acinclude.m4
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -199,7 +198,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # dlopened by *.so
-rm -f $RPM_BUILD_ROOT%{_libdir}/ao/plugins-2/*.{la,a}
+rm -f $RPM_BUILD_ROOT%{_libdir}/ao/plugins-4/*.{la,a}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -211,10 +210,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS CHANGES README TODO
 %attr(755,root,root) %{_libdir}/libao.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libao.so.4
 %dir %{_libdir}/ao
-%dir %{_libdir}/ao/plugins-2
-%attr(755,root,root) %{_libdir}/ao/plugins-2/liboss.so
-%{_mandir}/man5/*
+%dir %{_libdir}/ao/plugins-4
+%attr(755,root,root) %{_libdir}/ao/plugins-4/liboss.so
+%{_mandir}/man5/libao.conf.5*
 
 %files devel
 %defattr(644,root,root,755)
@@ -223,38 +223,38 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libao.la
 %{_includedir}/ao
 %{_aclocaldir}/ao.m4
-%{_pkgconfigdir}/*.pc
+%{_pkgconfigdir}/ao.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libao.a
 %endif
 
 %if %{with alsa}
 %files alsa
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-2/libalsa*.so
+%attr(755,root,root) %{_libdir}/ao/plugins-4/libalsa.so
 %endif
 
 %if %{with arts}
 %files arts
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-2/libarts.so
+%attr(755,root,root) %{_libdir}/ao/plugins-4/libarts.so
 %endif
 
 %files esd
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-2/libesd.so
+%attr(755,root,root) %{_libdir}/ao/plugins-4/libesd.so
 
 %if %{with nas}
 %files nas
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-2/libnas.so
+%attr(755,root,root) %{_libdir}/ao/plugins-4/libnas.so
 %endif
 
 %if %{with pulseaudio}
 %files pulse
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-2/libpulse.so
+%attr(755,root,root) %{_libdir}/ao/plugins-4/libpulse.so
 %endif
