@@ -3,6 +3,7 @@
 # Conditional build:
 %bcond_without	alsa		# don't build ALSA plugin
 %bcond_with	arts		# build aRts plugin
+%bcond_with	esd		# build ESD plugin
 %bcond_without	nas 		# don't build NAS plugin
 %bcond_with	pulseaudio	# build Pulseaudio plugin (currently available in libao-pulse.spec)
 %bcond_without	static_libs	# don't build static library
@@ -13,7 +14,7 @@ Summary(pl.UTF-8):	Międzyplatformowa biblioteka do odtwarzania dźwięku
 Summary(pt_BR.UTF-8):	Biblioteca libao
 Name:		libao
 Version:	1.0.0
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL v2+
 Group:		Libraries
@@ -24,7 +25,7 @@ URL:		http://www.xiph.org/ao/
 %{?with_arts:BuildRequires:	artsc-devel}
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1.6
-BuildRequires:	esound-devel >= 0.2.8
+%{?with_esd:BuildRequires:	esound-devel >= 0.2.8}
 BuildRequires:	libtool
 %{?with_nas:BuildRequires:	nas-devel}
 BuildRequires:	pkgconfig
@@ -36,31 +37,30 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Libao is a cross-platform audio library that allows programs to output
 audio using a simple API on a wide variety of platforms. It currently
-supports: Null output, WAV files, OSS (Open Sound System), ESD (ESounD
-or Enlighten Sound Daemon), ALSA (Advanced Linux Sound Architecture),
-Solaris (untested), IRIX (untested)
+supports: Null output, WAV files, OSS (Open Sound System), ALSA
+(Advanced Linux Sound Architecture), Solaris (untested), IRIX
+(untested)
 
 %description -l es.UTF-8
 Libaso es un biblioteca de audio que soporta programas com salida de
 audio usando una API simplificada en una gran variedad de
 arquiteturas. Hoy soporta Null output, WAV files, OSS (Open Sound
-System), ESD (ESounD or Enlighten Sound Daemon), ALSA (Advanced Linux
-Sound Architecture), Solaris (untested), IRIX (untested).
+System), ALSA (Advanced Linux Sound Architecture), Solaris (untested),
+IRIX (untested).
 
 %description -l pl.UTF-8
 Libao jest biblioteką do odtwarzania dźwięku, która ma proste API i
 jest dostępna na wielu różnych platformach. Aktualnie wspiera
 odtwarzanie na urządzenie puste (null output), do plików w formacie
-WAV, do demona ESD (ESounD tudzież Enlighten Sound Daemon) oraz
-urządzenia ALSA (Advanced Linux Sound Architecture), OSS (Open Sound
-System), Solaris i IRIX.
+WAV oraz urządzenia ALSA (Advanced Linux Sound Architecture), OSS
+(Open Sound System), Solaris i IRIX.
 
 %description -l pt_BR.UTF-8
 Libao é uma biblioteca de audio multi-plataforma que permite programas
 para saida de audio usando uma API simples em uma variedade grande de
 plataformas. Atualmente suporta Null output, WAV files, OSS (Open
-Sound System), ESD (ESounD or Enlighten Sound Daemon), ALSA (Advanced
-Linux Sound Architecture), Solaris (untested), IRIX (untested).
+Sound System), ALSA (Advanced Linux Sound Architecture), Solaris
+(untested), IRIX (untested).
 
 %package devel
 Summary:	Cross Platform Audio Output Library Development
@@ -181,6 +181,9 @@ Wtyczka Pulseaudio dla libao.
 %if !%{with arts}
 	--disable-arts \
 %endif
+%if !%{with esd}
+	--disable-esd \
+%endif
 %if !%{with nas}
 	--disable-nas \
 %endif
@@ -243,9 +246,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/ao/plugins-4/libarts.so
 %endif
 
+%if %{with esd}
 %files esd
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/ao/plugins-4/libesd.so
+%endif
 
 %if %{with nas}
 %files nas
