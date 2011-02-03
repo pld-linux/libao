@@ -30,6 +30,7 @@ BuildRequires:	libtool
 %{?with_nas:BuildRequires:	nas-devel}
 BuildRequires:	pkgconfig
 %{?with_pulseaudio:BuildRequires:	pulseaudio-devel >= 0.9}
+BuildRequires: rpmbuild(macros) >= 1.527
 %{?with_nas:BuildRequires:	xorg-lib-libXau-devel}
 Obsoletes:	libao2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
