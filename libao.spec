@@ -5,7 +5,7 @@
 %bcond_with	arts		# build aRts plugin
 %bcond_with	esd		# build ESD plugin
 %bcond_without	nas 		# don't build NAS plugin
-%bcond_with	pulseaudio	# build Pulseaudio plugin (currently available in libao-pulse.spec)
+%bcond_without	pulseaudio	# don't build Pulseaudio plugin
 %bcond_without	static_libs	# don't build static library
 #
 Summary:	Cross Platform Audio Output Library
@@ -14,7 +14,7 @@ Summary(pl.UTF-8):	Międzyplatformowa biblioteka do odtwarzania dźwięku
 Summary(pt_BR.UTF-8):	Biblioteca libao
 Name:		libao
 Version:	1.0.0
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL v2+
 Group:		Libraries
@@ -173,24 +173,12 @@ Wtyczka Pulseaudio dla libao.
 %{__autoconf}
 %{__automake}
 %configure \
-%if !%{with alsa}
-	--disable-alsa \
-%else
-	--enable-alsa \
-%endif
-%if !%{with arts}
-	--disable-arts \
-%endif
-%if !%{with esd}
-	--disable-esd \
-%endif
-%if !%{with nas}
-	--disable-nas \
-%endif
-%if !%{with pulseaudio}
-	--disable-pulse \
-%endif
-	--%{!?with_static_libs:dis}%{?with_static_libs:en}able-static
+	%{__enable_disable alsa} \
+	%{__enable_disable arts} \
+	%{__enable_disable esd} \
+	%{__enable_disable nas} \
+	%{__enable_disable pulseaudio pulse} \
+	%{__enable_disable static_libs static}
 
 %{__make}
 
