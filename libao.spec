@@ -1,4 +1,6 @@
-# TODO: roaraudio plugin (needs roaraudio: http://roaraudio.keep-cool.org/downloads.html)
+# TODO:
+# - roaraudio plugin (needs roaraudio: http://roaraudio.keep-cool.org/downloads.html)
+# - ckport support? (%{_libdir}/ckport/db/libao.ckport)
 #
 # Conditional build:
 %bcond_without	alsa		# don't build ALSA plugin
@@ -13,13 +15,13 @@ Summary(es.UTF-8):	Biblioteca libao
 Summary(pl.UTF-8):	Międzyplatformowa biblioteka do odtwarzania dźwięku
 Summary(pt_BR.UTF-8):	Biblioteca libao
 Name:		libao
-Version:	1.1.0
+Version:	1.2.0
 Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://downloads.xiph.org/releases/ao/%{name}-%{version}.tar.gz
-# Source0-md5:	2b2508c29bc97e4dc218fa162cf883c8
+# Source0-md5:	9f5dd20d7e95fd0dd72df5353829f097
 URL:		http://www.xiph.org/ao/
 %{?with_alsa:BuildRequires:	alsa-lib-devel >= 1.0.0}
 %{?with_arts:BuildRequires:	artsc-devel}
@@ -190,7 +192,13 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # dlopened by *.so
-rm -f $RPM_BUILD_ROOT%{_libdir}/ao/plugins-4/*.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/ao/plugins-4/*.la
+%if %{with static_libs}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/ao/plugins-4/*.a
+%endif
+
+# devel docs (HTML, C example)
+%{__mv} $RPM_BUILD_ROOT%{_docdir}/{libao-%{version},libao-devel-%{version}}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -210,12 +218,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/*{html,css,c}
 %attr(755,root,root) %{_libdir}/libao.so
 %{_libdir}/libao.la
 %{_includedir}/ao
 %{_aclocaldir}/ao.m4
 %{_pkgconfigdir}/ao.pc
+%{_docdir}/libao-devel-%{version}
 
 %if %{with static_libs}
 %files static
