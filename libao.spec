@@ -15,14 +15,13 @@ Summary(es.UTF-8):	Biblioteca libao
 Summary(pl.UTF-8):	Międzyplatformowa biblioteka do odtwarzania dźwięku
 Summary(pt_BR.UTF-8):	Biblioteca libao
 Name:		libao
-Version:	1.2.0
-Release:	4
+Version:	1.2.2
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		Libraries
-Source0:	http://downloads.xiph.org/releases/ao/%{name}-%{version}.tar.gz
-# Source0-md5:	9f5dd20d7e95fd0dd72df5353829f097
-URL:		http://www.xiph.org/ao/
+Source0:	https://github.com/xiph/libao/archive/refs/tags/%{version}.tar.gz
+URL:		https://www.xiph.org/ao/
 %{?with_alsa:BuildRequires:	alsa-lib-devel >= 1.0.0}
 %{?with_arts:BuildRequires:	artsc-devel}
 BuildRequires:	autoconf >= 2.50
