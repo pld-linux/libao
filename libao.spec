@@ -16,7 +16,7 @@ Summary(pl.UTF-8):	Międzyplatformowa biblioteka do odtwarzania dźwięku
 Summary(pt_BR.UTF-8):	Biblioteca libao
 Name:		libao
 Version:	1.2.0
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL v2+
 Group:		Libraries
@@ -176,6 +176,7 @@ Wtyczka Pulseaudio dla libao.
 %{__autoconf}
 %{__automake}
 %configure \
+	CFLAGS="%{rpmcflags} -std=gnu89" \
 	%{__enable_disable alsa} \
 	%{__enable_disable arts} \
 	%{__enable_disable esd} \
