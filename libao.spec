@@ -210,16 +210,16 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS CHANGES README TODO
-%attr(755,root,root) %{_libdir}/libao.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libao.so.4
+%{_libdir}/libao.so.*.*.*
+%ghost %{_libdir}/libao.so.4
 %dir %{_libdir}/ao
 %dir %{_libdir}/ao/plugins-4
-%attr(755,root,root) %{_libdir}/ao/plugins-4/liboss.so
+%{_libdir}/ao/plugins-4/liboss.so
 %{_mandir}/man5/libao.conf.5*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libao.so
+%{_libdir}/libao.so
 %{_libdir}/libao.la
 %{_includedir}/ao
 %{_aclocaldir}/ao.m4
@@ -235,29 +235,29 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with alsa}
 %files alsa
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-4/libalsa.so
+%{_libdir}/ao/plugins-4/libalsa.so
 %endif
 
 %if %{with arts}
 %files arts
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-4/libarts.so
+%{_libdir}/ao/plugins-4/libarts.so
 %endif
 
 %if %{with esd}
 %files esd
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-4/libesd.so
+%{_libdir}/ao/plugins-4/libesd.so
 %endif
 
 %if %{with nas}
 %files nas
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-4/libnas.so
+%{_libdir}/ao/plugins-4/libnas.so
 %endif
 
 %if %{with pulseaudio}
 %files pulse
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/ao/plugins-4/libpulse.so
+%{_libdir}/ao/plugins-4/libpulse.so
 %endif
