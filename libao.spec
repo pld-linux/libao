@@ -198,6 +198,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/ao/plugins-4/*.a
 %endif
 
+# no ckport in PLD
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/ckport/db/libao.ckport
+
 # devel docs (HTML, C example)
 %{__mv} $RPM_BUILD_ROOT%{_docdir}/{libao-%{version},libao-devel-%{version}}
 
