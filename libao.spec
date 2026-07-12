@@ -181,6 +181,7 @@ Wtyczka Pulseaudio dla libao.
 	%{__enable_disable esd} \
 	%{__enable_disable nas} \
 	%{__enable_disable pulseaudio pulse} \
+	--disable-silent-rules \
 	%{__enable_disable static_libs static}
 
 %{__make}
