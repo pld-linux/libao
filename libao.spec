@@ -21,6 +21,7 @@ Epoch:		1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://github.com/xiph/libao/archive/refs/tags/%{version}.tar.gz
+# Source0-md5:	71a9f8366718036e90954e4f0a4030e0
 URL:		https://www.xiph.org/ao/
 %{?with_alsa:BuildRequires:	alsa-lib-devel >= 1.0.0}
 %{?with_arts:BuildRequires:	artsc-devel}
