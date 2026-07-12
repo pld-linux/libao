@@ -158,7 +158,7 @@ Summary:	Pulseaudio plugin for libao
 Summary(pl.UTF-8):	Wtyczka Pulseaudio dla libao
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Obsoletes:	libao-polyp
+Obsoletes:	libao-polyp < 1:0.8.8
 
 %description pulse
 Pulseaudio plugin for libao.
